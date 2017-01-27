@@ -9,7 +9,7 @@ Notez que vous avez besoin de "xeboiboites.sty" pour utiliser ce paquet.
 Vous avez accès à plusieurs environnements :
 - l'environnement "colle" (jusqu'à 6 sujets "tamponnés" de A à F)
 - l'environnement "bonus" (tamponné "bonus" pour, par exemple, vos exercices de 
-secours le jour où vous tombez sur un étudiant en forme).
+secour le jour où vous tombez sur un étudiant en forme).
 
 À l'intérieur d'un environnement "colle" ou "bonus", vous pouvez mettre :
 - une question de cours (environnement "qc")
