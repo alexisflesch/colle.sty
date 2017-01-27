@@ -1,0 +1,147 @@
+%-*- coding: utf-8 -*-
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+\newif\ifrapport
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% A mettre en commentaire ou non suivant ce qu'on veut imprimer
+% \rapporttrue
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\bla}{\textbf{Oral blanc}}
+\newcommand{\blabla}{Semaine du 12 décembre}
+\usepackage{colle2}
+
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%% SUJET 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{colle}
+
+\begin{demo}
+    Démontrer le théorème de Pythagore.
+\end{demo}
+
+
+\begin{exercice}
+    \renewcommand{\labelitemi}{\textbullet}%
+    %Probabilités, formule des probabilités totales
+    %série géométrique dérivée
+    Monsieur Migros, frontalier embourgeoisé, a décidé de se mettre au footing.
+    Il décide d'utiliser un protocole spécial pour savoir combien de kilomètres 
+    parcourir chaque jour. Pour ce faire:
+    \begin{itemize}
+       \item Il lance un dé et compte le nombre $n$ de lancers nécessaires pour 
+          obtenir un six.
+       \item Il lance ensuite une pièce équilibrée $n$ fois et compte le nombre 
+            de «pile» obtenus : c'est le nombre de kilomètres qu'il devra 
+        parcourir.
+    \end{itemize}
+    Dans toute la suite on notera :
+    \begin{itemize}
+       \item $A_n$:«le premier six est obtenu au $n$-ième lancer»,
+       \item $B_p$:«la pièce est tombée $p$ fois sur pile».
+    \end{itemize}
+    \begin{enumerate}
+       \item Calculer $\mathbb{P}(A_n)$ pour tout $n\in\mathbb{N}^\star$
+       \item Calculer $\mathbb{P}(B_0)$.
+       \item Soit $x\in ]0,1[$. Rappeler la formule permettant de calculer:
+            \[ 1+x+x^2+\ldots+x^{n-1}.\]
+       \item En dérivant la relation obtenue, déterminer la convergence et la 
+            valeur de la série $\sum nx^n$.
+       \item En déduire $\mathbb{P}(B_1)$.
+    \end{enumerate}
+
+    \begin{correction}
+     \begin{enumerate}
+      \item On montre que $\mathbb{P}(A_n) = (5/6)^{n-1}\cdot 1/6$.
+      \item D'après la formule des probabilités totales,
+        pour tout $p\geqslant 0$
+      \begin{align*}
+        \mathbb{P}(B_p) &= \sum_{\substack{n=p\\n\geqslant 1}}^{+\infty} 
+                        \frac{n!}{p!(n-p)!} \left(
+                        \frac{5}{12} \right)^{n-1} \frac{1}{12}
+        \intertext{et donc}
+        \mathbb{P}(B_0) &= \sum_{n=1}^{+\infty} \left(
+                        \frac{5}{12} \right)^{n-1} \frac{1}{12} \\
+                        &= \frac{1}{7}.
+      \end{align*}
+      \item facile.
+      \item D'après ce qui précède:
+        \begin{align*}
+          \mathbb{P}(B_1) &= \sum_{n=1}^{+\infty} n \left(
+                        \frac{5}{12} \right)^{n-1} \frac{1}{12} \\
+                          &= \frac{12}{49}
+      \end{align*}
+      (vérifier la dernière égalité).
+     \end{enumerate}
+
+    \end{correction}
+\end{exercice}
+
+
+\end{colle}
+
+
+%%%%%%%%%%%%%%%%%%%%% SUJET 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{colle}
+
+\begin{exercice}
+  Déterminer $A^n$ pour tout $n\in\mathbb{N}$ où:
+  \[
+    A = \begin{pmatrix}
+        -3 & 2 & 1\\
+        0 & -2 & 0\\
+        -2 & 4 & 0\\
+    \end{pmatrix}
+  \]
+\begin{correction}
+On montre que $A$ est diagonalisable. Avec les notations du cours, une solution 
+est:
+\[ P =\begin{pmatrix}
+  1 & -1 & -2\\
+  0 & 0 & -1\\
+  1 & -2 & 0\\
+\end{pmatrix},\, D =\begin{pmatrix}
+  -2 & 0 & 0\\
+  0 & -1 & 0\\
+  0 & 0 & -2\\
+\end{pmatrix},\, P^{-1} =\begin{pmatrix}
+  2 & -4 & -1\\
+  1 & -2 & -1\\
+  0 & -1 & 0\\
+\end{pmatrix}.\]
+\end{correction}
+
+\end{exercice}
+
+\begin{exercice}
+     Damien fait du ski à la station ``Vallées blanches''. Il est en
+    haut du téléski des Cailloux, et a le choix entre les pistes de
+    Tout-Plat (une bleue), Les-Bosses (une rouge) et Rase-Mottes (une
+    noire). Il va choisir une de ces trois pistes au hasard, de telle
+    façon qu'il choisisse la bleue ou la noire avec probabilité $1/4$,
+    et la rouge, qu'il préfère, avec probabilité $1/2$. Il descend
+    ensuite la piste choisie. Damien n'est pas encore très à l'aise
+    cette saison, et il tombe avec une probabilité de $0,1$ sur la
+    piste bleue, de $0,15$ sur la piste rouge, et de $0,4$ sur la
+    piste noire.
+    \begin{enumerate}
+        \item Modéliser la situation.
+        \item Soit $A$ l'événement ``\emph{Damien tombe en descendant la piste
+            qu'il a choisie}''. Calculer $P(A)$.
+        \item Maxime attend Damien à la terrasse d'un
+            café et le voit arriver couvert de neige: Damien est tombé.
+            Déterminer la probabilité que Damien ait choisi la piste noire.
+    \end{enumerate}
+
+\end{exercice}
+
+
+
+\end{colle}
+
+
+\solutions
+
+
+\end{document}

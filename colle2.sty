@@ -1,0 +1,171 @@
+%% Informations générales
+\NeedsTeXFormat{LaTeX2e}[1999/01/01]
+\ProvidesPackage{colle2}[2016/09/06]
+
+\newwrite\tempfile
+
+%Paquets
+\usepackage[english,frenchb]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{stmaryrd}
+\usepackage{dsfont}
+\usepackage{amsthm}
+\usepackage{slashbox}
+\usepackage{geometry}
+\usepackage{mathdots}
+\usepackage{tikz}
+\usepackage{answers}      %Pour renvoyer les corrections à la fin
+\usepackage{alphalph}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{xeboiboites}
+\usepackage{mathrsfs}
+\usepackage{ifthen}
+\usepackage{textpos} %Pour tamponner les en-têtes
+\setlength{\TPHorizModule}{\paperwidth}
+\setlength{\TPVertModule}{\paperheight}
+
+% Polices
+\usepackage{palatino}
+\usepackage[cm]{sfmath}
+
+    
+%Geométrie
+\geometry{landscape}
+\geometry{top=1cm, bottom=1cm, left=2.5cm, right=1cm}
+\geometry{twocolumn, columnsep=3cm}
+\pagestyle{empty}
+
+
+%%%%%%%%%%%%%%%%% Création des environnements à l'aide de xeboiboites
+\newspanning[image=pencil,headfont=\bfseries,%
+    spanning style={thick, decoration=zigzag, decorate}]%
+    {exercice}{Exercice}{exercice}
+
+\newspanning[image=livres,headfont=\bfseries,%
+    upshift=0cm,%
+    spanning style={thick}]%
+    {qc}{Question de cours}{}
+
+\newspanning[image=livres,headfont=\bfseries,%
+    upshift=0cm,
+    spanning style={thick}]%
+    {demo}{Démonstration de cours}{}
+    
+%%%%%%%%%%%%%%%%% Corrections %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Newassociation{correction}{CorrectionExoTemp}{correction}
+\renewenvironment{CorrectionExoTemp}[1]{%
+    \noindent\textbf{Correction #1.}%
+    }{%
+    \bigskip%
+}
+
+\newcommand{\solutions}{%
+    \newpage%
+    \foreach\x in {1,...,\thecolle}{%
+    \begin{center}
+        {\bfseries Correction du sujet \AlphAlph{\x}}
+    \end{center}
+    \input{solutions_\x}
+    }
+    \ifnum\thebonus=0%
+    \else
+    \begin{center}
+        {\bfseries Correction des exercices bonus}
+    \end{center}
+    \input{solutions_bonus}
+    \fi
+}
+
+%%%%%%%%%%%%%%%%%%%% Environnement colle %%%%%%%%%%%%%%%%%%%%%
+
+\newcounter{colle}
+\newenvironment{colle}%
+    {   \refstepcounter{colle}%
+        \immediate\openout\tempfile=solutions_\thecolle.tex%
+        \immediate\write\tempfile{Pas de sujet}%
+        \immediate\closeout\tempfile%
+        \entete%
+        \Opensolutionfile{correction}[solutions_\thecolle]%
+    }%
+    {%
+        \Closesolutionfile{correction}%
+    }
+
+
+%%%%%%%%%%%%%%%%%%%% Environnement bonus %%%%%%%%%%%%%%%%%%%%%
+
+\newcounter{bonus}
+\newenvironment{bonus}%
+    {   \refstepcounter{bonus}%
+        \immediate\openout\tempfile=solutions_bonus.tex%
+        \immediate\write\tempfile{Pas de sujet}%
+        \immediate\closeout\tempfile%
+        \entetebonus%
+        \Opensolutionfile{correction}[solutions_bonus]%
+    }%
+    {%
+        \Closesolutionfile{correction}%
+    }
+
+
+
+%Commandes personnalisées
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathbb{V}\textrm{ar}}
+\newcommand{\Cov}{\textrm{Cov}}
+\newcommand{\argch}{\textrm{argch}}
+
+
+\newcommand{\entete}{%
+\newpage
+\vspace{.5cm}%
+\setcounter{exercice}{0}%
+\hrule%
+\vspace{.4cm}%
+% \begin{minipage}{.1\linewidth}%
+%     {\Large \encircle{\Alph{colle}}}%
+% \end{minipage}%
+\begin{textblock}{1}(-.1,-.035)
+    \includegraphics[width=3.5cm]{sujet\thecolle}
+\end{textblock}
+\hfill%
+\begin{minipage}{.84\linewidth}%
+\begin{center}%
+    \textbf{\bla}\\[2pt]%
+    \textbf{\blabla}%
+\end{center}%
+\end{minipage}%
+\vspace{.3cm}%
+\hrule%
+\vspace{.5cm}%
+}
+
+
+\newcommand{\entetebonus}{%
+\newpage
+\vspace{.5cm}%
+\setcounter{exercice}{0}%
+\hrule%
+\vspace{.4cm}%
+\begin{textblock}{1}(-.1,-.035)
+    \includegraphics[width=3.5cm]{bonus}
+\end{textblock}
+\hfill%
+\begin{minipage}{.84\linewidth}%
+\begin{center}%
+    \textbf{\bla}\\[2pt]%
+    \textbf{\blabla}%
+\end{center}%
+\end{minipage}%
+\vspace{.3cm}%
+\hrule%
+\vspace{.5cm}%
+}
